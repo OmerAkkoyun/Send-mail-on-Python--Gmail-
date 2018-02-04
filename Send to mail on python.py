@@ -4,52 +4,52 @@ from email.mime.text import MIMEText
 import sys
 
 """
-SMTP Modülü ile mail gönderme
+SMTP ModÃ¼lÃ¼ ile mail gÃ¶nderme
 
-İlk olarak daha az güvenli uygulamalar için öncelikle aşağıdaki linke gidiyoruz ve güvenliği
-kaldırıyoruz.
+Ä°lk olarak daha az gÃ¼venli uygulamalar iÃ§in Ã¶ncelikle aÅŸaÄŸÄ±daki linke gidiyoruz ve gÃ¼venliÄŸi
+kaldÄ±rÄ±yoruz.
 
 https://myaccount.google.com/lesssecureapps
 
 """
 
-mesaj = MIMEMultipart()  # Mail yapımızı oluşturuyoruz.
+mesaj = MIMEMultipart()  # Mail yapÄ±mÄ±zÄ± oluÅŸturuyoruz.
 
-mesaj["From"] = "mail gir "  # Kimden Göndereceğimiz
+mesaj["From"] = "mail gir "  # Kimden GÃ¶ndereceÄŸimiz
 
-mesaj["To"] = "mail gir "  # Kime Göndereceğimiz
+mesaj["To"] = "mail gir "  # Kime GÃ¶ndereceÄŸimiz
 
-mesaj["Subject"] = "Smtp Mail Gönderme"  # Mailimizin Konusu
+mesaj["Subject"] = "Smtp Mail GÃ¶nderme"  # Mailimizin Konusu
 
-# Mailimizin İçeriği
+# Mailimizin Ä°Ã§eriÄŸi
 yazi = """
+YazÄ±lar burada olacak............
+Merhaba, Python ile mail gÃ¶nderiyorum.    
 
-Merhaba, Python ile mail gönderiyorum.    
 
-Ömer Akkoyun
 
 
 """
 
-mesaj_govdesi = MIMEText(yazi, "plain")  # Mailimizin gövdesini bu sınıftan oluşturuyoruz.
+mesaj_govdesi = MIMEText(yazi, "plain")  # Mailimizin gÃ¶vdesini bu sÄ±nÄ±ftan oluÅŸturuyoruz.
 
-mesaj.attach(mesaj_govdesi)  # Mailimizin gövdesini mail yapımıza ekliyoruz.
+mesaj.attach(mesaj_govdesi)  # Mailimizin gÃ¶vdesini mail yapÄ±mÄ±za ekliyoruz.
 
 try:
-    mail = smtplib.SMTP("smtp.gmail.com", 587)  # SMTP objemizi oluşturuyoruz ve gmail smtp server'ına bağlanıyoruz.
+    mail = smtplib.SMTP("smtp.gmail.com", 587)  # SMTP objemizi oluÅŸturuyoruz ve gmail smtp server'Ä±na baÄŸlanÄ±yoruz.
 
-    mail.ehlo()  # SMTP serverına kendimizi tanıtıyoruz.
+    mail.ehlo()  # SMTP serverÄ±na kendimizi tanÄ±tÄ±yoruz.
 
-    mail.starttls()  # Adresimizin ve Parolamızın şifrelenmesi için gerekli
+    mail.starttls()  # Adresimizin ve ParolamÄ±zÄ±n ÅŸifrelenmesi iÃ§in gerekli
 
     mail.login("mail gir @gmail.com",
-               "*şifregirilcek")  # SMTP server'ına giriş yapıyoruz. Kendi mail adresimizi ve parolamızı yapıyoruz.
+               "*ÅŸifregirilcek")  # SMTP server'Ä±na giriÅŸ yapÄ±yoruz. Kendi mail adresimizi ve parolamÄ±zÄ± yapÄ±yoruz.
 
-    mail.sendmail(mesaj["From"], mesaj["To"], mesaj.as_string())  # Mailimizi gönderiyoruz.
-    print("Mail başarıyla gönderildi....")
-    mail.close()  # Smtp serverımızın bağlantısını koparıyoz.
+    mail.sendmail(mesaj["From"], mesaj["To"], mesaj.as_string())  # Mailimizi gÃ¶nderiyoruz.
+    print("Mail baÅŸarÄ±yla gÃ¶nderildi....")
+    mail.close()  # Smtp serverÄ±mÄ±zÄ±n baÄŸlantÄ±sÄ±nÄ± koparÄ±yoz.
 
 except:
     sys.stderr.write(
-        "Mail göndermesi başarısız oldu...")  # Herhangi bir bağlanma sorunu veya mail gönderme sorunu olursa
+        "Mail gÃ¶ndermesi baÅŸarÄ±sÄ±z oldu...")  # Herhangi bir baÄŸlanma sorunu veya mail gÃ¶nderme sorunu olursa
     sys.stderr.flush()
